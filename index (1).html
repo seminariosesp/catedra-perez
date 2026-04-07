@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cátedra Pérez — Sociología Económica · FSOC · UBA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #2b2d2f;
+    --navy-mid: #3e4245;
+    --cream: #f4f1ed;
+    --cream-dark: #e8e3db;
+    --gold: #7a6a52;
+    --gold-light: #c07a5a;
+    --rust: #c07a5a;
+    --text: #1e1e1e;
+    --text-muted: #5e5e5e;
+    --white: #fdfaf6;
+    --border: #d6cfc5;
+    --sage: #5c7a65;
+    --sage-light: #8aaa90;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--navy);
+    border-bottom: 2px solid var(--sage);
+    display: flex; align-items: stretch;
+  }
+  .nav-brand {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 12px 28px;
+    border-right: 1px solid rgba(255,255,255,.12);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .nav-brand .brand-title {
+    font-family: 'Playfair Display', serif;
+    color: var(--cream);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: .01em;
+  }
+  .nav-brand .brand-sub {
+    font-family: 'DM Mono', monospace;
+    color: var(--sage-light);
+    font-size: .65rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 0;
+    padding: 0 16px;
+    flex-wrap: wrap;
+  }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: .7rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.65);
+    text-decoration: none;
+    padding: 8px 14px;
+    transition: color .2s, background .2s;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--sage-light);
+    background: rgba(255,255,255,.06);
+  }
+  .nav-links a.active {
+    color: var(--cream);
+    border-bottom: 2px solid var(--sage);
+  }
+
+  /* ── PAGES ── */
+  .page { display: none; padding-top: 70px; animation: fadein .4s ease; }
+  .page.active { display: block; }
+  @keyframes fadein { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    min-height: 82vh;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 80px 0;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(92,122,101,.18) 0%, transparent 70%),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,.018) 60px,
+        rgba(255,255,255,.018) 61px
+      );
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 900px; margin: 0 auto; padding: 0 48px;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: .72rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--sage);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.15;
+    margin-bottom: 20px;
+    max-width: 750px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }  .hero-sub {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(247,243,236,.7);
+    line-height: 1.75;
+    max-width: 600px;
+    margin-bottom: 48px;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--sage);
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: .78rem;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border: none; cursor: pointer;
+    transition: background .2s, transform .15s;
+    text-decoration: none;
+  }
+  .hero-cta:hover { background: var(--sage-light); transform: translateY(-2px); }
+
+  .hero-meta {
+    margin-top: 64px;
+    display: flex; gap: 48px;
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding-top: 32px;
+  }
+  .hero-meta-item { }
+  .hero-meta-item .label {
+    font-family: 'DM Mono', monospace;
+    font-size: .62rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 6px;
+  }
+  .hero-meta-item .value {
+    font-size: .95rem;
+    color: rgba(247,243,236,.8);
+    font-weight: 300;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    max-width: 860px; margin: 0 auto;
+    padding: 72px 48px;
+  }
+  .section-sm { max-width: 720px; margin: 0 auto; padding: 72px 48px; }
+
+  /* ── PAGE HEADERS ── */
+  .page-header {
+    background: var(--navy);
+    padding: 56px 48px 48px;
+  }
+  .page-header .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: .68rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 14px;
+  }
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--cream);
+    font-weight: 700;
+    max-width: 700px;
+    line-height: 1.2;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--navy);
+    margin-bottom: 16px;
+    margin-top: 52px;
+    font-weight: 700;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--navy-mid);
+    margin-top: 36px;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  h4 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    color: var(--text);
+    margin-top: 24px;
+    margin-bottom: 8px;
+    font-style: italic;
+    font-weight: 600;
+  }
+  p {
+    font-size: 1rem;
+    line-height: 1.82;
+    color: var(--text);
+    margin-bottom: 18px;
+    font-weight: 300;
+  }
+
+  /* ── OBJETIVOS LIST ── */
+  .obj-list { list-style: none; margin: 0; padding: 0; }
+  .obj-list li {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--cream-dark);
+    font-size: .97rem;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  .obj-list li::before {
+    content: attr(data-n);
+    font-family: 'DM Mono', monospace;
+    font-size: .7rem;
+    color: var(--sage);
+    min-width: 22px;
+    margin-top: 4px;
+  }
+
+  /* ── MODULO CARDS ── */
+  .modulo {
+    border-left: 3px solid var(--sage);
+    padding: 24px 28px;
+    background: var(--white);
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  }
+  .modulo-label {
+    font-family: 'DM Mono', monospace;
+    font-size: .62rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 6px;
+  }
+  .modulo h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .modulo p { margin: 0; font-size: .9rem; color: var(--text-muted); }
+
+  /* ── DOCENTES ── */
+  .docente-card {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .docente-avatar {
+    width: 80px; height: 80px;
+    background: var(--sage);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+  .docente-role {
+    font-family: 'DM Mono', monospace;
+    font-size: .65rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 4px;
+  }
+  .docente-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .docente-card p { font-size: .9rem; margin-bottom: 10px; }
+
+  /* ── INVESTIGACION ── */
+  .inv-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .inv-item::before {
+    content: '→';
+    color: var(--sage);
+    font-size: 1rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .inv-item p { margin: 0; font-size: .92rem; line-height: 1.6; font-weight: 300; }
+
+  /* ── BIBLIOTECA ── */
+  .bib-unidad {
+    background: var(--white);
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .bib-unidad-header {
+    padding: 18px 24px;
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: background .2s;
+    user-select: none;
+  }
+  .bib-unidad-header:hover { background: var(--cream-dark); }
+  .bib-unidad-header h3 {
+    margin: 0;
+    font-size: .98rem;
+    color: var(--navy);
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-style: italic;
+  }
+  .bib-chevron {
+    color: var(--sage);
+    font-size: 1.1rem;
+    transition: transform .25s;
+    flex-shrink: 0;
+  }
+  .bib-unidad.open .bib-chevron { transform: rotate(180deg); }
+  .bib-body {
+    display: none;
+    padding: 0 24px 20px;
+    border-top: 1px solid var(--cream-dark);
+  }
+  .bib-unidad.open .bib-body { display: block; }
+
+  .bib-section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: .62rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 20px 0 10px;
+  }
+  .bib-item {
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--cream-dark);
+  }
+  .bib-item a {
+    font-size: .88rem;
+    color: var(--navy-mid);
+    text-decoration: none;
+    line-height: 1.55;
+    font-weight: 300;
+    transition: color .2s;
+  }
+  .bib-item a:hover {
+    color: var(--gold-light);
+    text-decoration: underline;
+  }
+  .bib-item a::before {
+    content: '↗ ';
+    font-size: .75rem;
+    opacity: .6;
+  }
+
+  /* ── CONTACTO ── */
+  .contacto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .contacto-info .label {
+    font-family: 'DM Mono', monospace;
+    font-size: .65rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 6px;
+    margin-top: 28px;
+  }
+  .contacto-info .value {
+    font-size: .95rem;
+    color: var(--text);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: .65rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .form-group input, .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    font-family: 'Source Serif 4', serif;
+    font-size: .95rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color .2s;
+    font-weight: 300;
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    border-color: var(--navy);
+  }
+  .form-group textarea { resize: vertical; min-height: 140px; }
+  .btn-submit {
+    background: var(--sage);
+    color: var(--white);
+    border: none;
+    padding: 14px 32px;
+    font-family: 'DM Mono', monospace;
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .btn-submit:hover { background: var(--sage-light); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 2px solid var(--sage);
+    padding: 40px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  footer .footer-brand {
+    font-family: 'Playfair Display', serif;
+    color: var(--cream);
+    font-size: 1rem;
+  }
+  footer .footer-info {
+    font-family: 'DM Mono', monospace;
+    font-size: .62rem;
+    letter-spacing: .08em;
+    color: rgba(247,243,236,.45);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    .hero-inner { padding: 0 24px; }
+    .hero-meta { flex-direction: column; gap: 24px; }
+    .section, .section-sm { padding: 48px 24px; }
+    .page-header { padding: 40px 24px; }
+    .contacto-grid { grid-template-columns: 1fr; }
+    .docente-card { grid-template-columns: 1fr; }
+    footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+    footer .footer-info { text-align: center; }
+    .hamburger { display: flex !important; }
+    .mobile-menu { display: none; flex-direction: column; background: var(--navy); position: fixed; top: 58px; left: 0; right: 0; z-index: 99; padding: 16px 24px; gap: 4px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: rgba(255,255,255,.75); font-family: 'DM Mono', monospace; font-size: .8rem; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08); text-transform: uppercase; letter-spacing: .06em; cursor: pointer; }
+  }
+
+  .hamburger {
+    display: none;
+    margin-left: auto;
+    margin-right: 20px;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--cream);
+    transition: .3s;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: .6rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    background: var(--cream-dark);
+    color: var(--text-muted);
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-right: 6px;
+  }
+
+  .highlight-box {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+  .highlight-box p {
+    color: rgba(247,243,236,.8);
+    font-size: .95rem;
+    margin: 0;
+    line-height: 1.75;
+  }
+  .highlight-box p strong {
+    color: var(--sage-light);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand" onclick="showPage('inicio')">
+    <span class="brand-title">Cátedra Pérez</span>
+    <span class="brand-sub">FSOC · UBA</span>
+  </div>
+  <div class="nav-links">
+    <a onclick="showPage('inicio')" class="active" data-page="inicio">Inicio</a>
+    <a onclick="showPage('programa')" data-page="programa">Programa</a>
+    <a onclick="showPage('docentes')" data-page="docentes">Docentes</a>
+    <a onclick="showPage('investigacion')" data-page="investigacion">Investigación</a>
+    <a onclick="showPage('biblioteca')" data-page="biblioteca">Biblioteca</a>
+    <a onclick="showPage('contacto')" data-page="contacto">Contacto</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="showPage('inicio');toggleMenu()">Inicio</a>
+  <a onclick="showPage('programa');toggleMenu()">Programa</a>
+  <a onclick="showPage('docentes');toggleMenu()">Docentes</a>
+  <a onclick="showPage('investigacion');toggleMenu()">Investigación</a>
+  <a onclick="showPage('biblioteca');toggleMenu()">Biblioteca</a>
+  <a onclick="showPage('contacto');toggleMenu()">Contacto</a>
+</div>
+
+<!-- ═══════════ INICIO ═══════════ -->
+<div class="page active" id="page-inicio">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Seminario de grado</div>
+      <h1>Sociología económica:<br><em>Los servicios públicos<br>en la Argentina reciente</em></h1>
+      <p class="hero-sub">Un seminario que aborda los debates en torno a la gestión estatal, la regulación y los usuarios de los servicios públicos desde la <strong style="color:var(--sage-light);font-style:italic">sociología económica</strong> como lente analítico central.</p>
+      <a class="hero-cta" onclick="showPage('programa')">Ver programa →</a>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="label">Institución</div>
+          <div class="value">Carrera de Sociología · FSOC · UBA</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="label">Cátedra</div>
+          <div class="value">Cátedra Pérez</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="label">Tipo</div>
+          <div class="value">Seminario de investigación</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Sobre el seminario</h2>
+    <p>Los servicios públicos son un tema recurrente en la agenda pública, aunque no por buenas razones. Tarifazos, fallas en las prestaciones, conductas poco transparentes de los prestatarios, debilidad de la regulación estatal, indefensión de los usuarios: estos conflictos dominan los debates actuales.</p>
+    <p>Este seminario se propone aportar a estas discusiones desde una perspectiva integral que permita dilucidar la raíz de los conflictos existentes. El enfoque enfatiza los diferenciales de poder entre Estado, mercado y usuarios, así como las lógicas que se desenvuelven en las relaciones entre los actores de esta tríada. En él, los enfoques de la <strong>sociología económica</strong> se convierten en el aliado analítico imprescindible.</p>
+
+    <div class="highlight-box">
+      <p>Porque <strong>a investigar se aprende investigando</strong>, la propuesta del seminario se apoya en un fuerte contenido teórico-metodológico que dota a los estudiantes de las herramientas necesarias para transitar el sinuoso pero estimulante camino de la construcción de conocimiento social.</p>
+    </div>
+
+    <h2>Preguntas que guían el curso</h2>
+    <ul class="obj-list">
+      <li data-n="01">¿Cuáles han sido los principales paradigmas de gestión de los servicios públicos a lo largo de la historia y qué factores intervinieron en su transformación?</li>
+      <li data-n="02">¿Cómo se han desarrollado las relaciones entre el Estado, los empresarios y otros actores intervinientes en la provisión de los servicios?</li>
+      <li data-n="03">¿Cuáles son las lógicas que, como producto de cada entramado de relaciones, terminan caracterizando su provisión?</li>
+      <li data-n="04">¿Cuál es el rol de los usuarios y qué mecanismos de habilitación social existen para la tramitación de sus demandas?</li>
+    </ul>
+  </div>
+
+  <footer>
+    <div class="footer-brand">Cátedra Pérez — Sociología Económica</div>
+    <div class="footer-info">Carrera de Sociología · FSOC · UBA<br>Instituto de Investigaciones Gino Germani</div>
+  </footer>
+</div>
+
+<!-- ═══════════ PROGRAMA ═══════════ -->
+<div class="page" id="page-programa">
+  <div class="page-header">
+    <div class="eyebrow">Seminario · FSOC · UBA</div>
+    <h1>Programa</h1>
+  </div>
+
+  <div class="section">
+    <h2>I. Fundamentos y Objetivos</h2>
+    <p>Los debates en torno al alcance de la acción estatal en materia de servicios públicos cobraron gran relevancia en América Latina a partir de mediados de los setenta, en el marco de la crisis de los Estados de Bienestar. En Argentina, estos cambios se intensificaron a inicios de la década del noventa, con la privatización de empresas de bienes y servicios públicos.</p>
+    <p>A partir de la crisis de 2001, se generó un fuerte cuestionamiento social del programa privatizador. Con el ciclo político iniciado en 2003 se incrementó la participación estatal, aunque gran parte de las concesiones existentes se mantuvieron, poniendo en evidencia las complejas relaciones entre los actores intervinientes. Este seminario aborda esos procesos desde el enfoque de la <strong>sociología económica</strong>, articulando el estudio de las relaciones entre Estado, mercado y sociedad civil.</p>
+
+    <h3>Objetivos</h3>
+    <ul class="obj-list">
+      <li data-n="→">Ofrecer herramientas teóricas y metodológicas para un acercamiento investigativo a los interrogantes planteados.</li>
+      <li data-n="→">Revisar el alcance del concepto de servicio público y sus implicancias en la gestión y regulación.</li>
+      <li data-n="→">Caracterizar las transformaciones en la prestación y regulación de los servicios públicos de infraestructura en la Argentina reciente.</li>
+      <li data-n="→">Abordar los debates actuales relativos al rol del Estado en la provisión de los servicios públicos.</li>
+      <li data-n="→">Estudiar las relaciones entre el Estado y las empresas prestadoras considerando estructura del mercado, articulación con el sector público y capacidades estatales.</li>
+      <li data-n="→">Caracterizar las relaciones de producción y consumo entre prestadores de servicios, usuarios y Estado.</li>
+    </ul>
+
+    <h2>II. Estructura del Seminario</h2>
+
+    <div class="modulo">
+      <div class="modulo-label">Módulo I</div>
+      <h3>Los servicios públicos de infraestructura económica</h3>
+      <p><strong>Unidad 1:</strong> Delimitando los servicios públicos — Definición del concepto: aspectos jurídicos, económicos y sociales. Fronteras entre lo público y lo privado.<br>
+      <strong>Unidad 2:</strong> Regulación, subsidios y tarifas — Agencias reguladoras, mecanismos regulatorios y componentes tarifarios.</p>
+    </div>
+
+    <div class="modulo">
+      <div class="modulo-label">Módulo II</div>
+      <h3>La tríada Estado, mercado y sociedad civil</h3>
+      <p><strong>Unidad 3:</strong> Mercados, empresas y empresarios — Acción económica y estructura social. Nueva sociología económica.<br>
+      <strong>Unidad 4:</strong> La relación Estado-empresarios — Reciprocidad, autonomía relativa y enraizamiento. Capacidades estatales.<br>
+      <strong>Unidad 5:</strong> El rol de los usuarios — Relaciones de poder, participación y control ciudadano en los servicios públicos.</p>
+    </div>
+
+    <div class="modulo">
+      <div class="modulo-label">Módulo III</div>
+      <h3>El derrotero de los servicios públicos en la historia argentina reciente</h3>
+      <p><strong>Unidad 6:</strong> Perspectiva histórica — Orígenes y fases de la empresa pública en Argentina y América Latina.<br>
+      <strong>Unidad 7:</strong> Cambios y continuidades (1990–2020) — Privatizaciones, renegociaciones contractuales y procesos de reestatización.</p>
+    </div>
+
+    <div class="modulo">
+      <div class="modulo-label">Módulo IV</div>
+      <h3>La brújula metodológica</h3>
+      <p><strong>Unidad 8:</strong> La pregunta de investigación — Hipótesis, métodos y metodología en ciencias sociales.</p>
+    </div>
+
+    <h2>III. Evaluación</h2>
+    <p>El régimen de evaluación consta de dos instancias formales, de carácter grupal:</p>
+    <ul class="obj-list">
+      <li data-n="1°">Los estudiantes, en grupos de no más de cuatro personas, eligen un caso de estudio y diseñan un pre-proyecto de investigación. La presentación es escrita y oral.</li>
+      <li data-n="2°">Cada grupo avanza en la investigación empírica de alguna de las dimensiones propuestas y presenta un trabajo final escrito, aplicando los contenidos conceptuales y metodológicos del seminario.</li>
+    </ul>
+  </div>
+
+  <footer>
+    <div class="footer-brand">Cátedra Pérez — Sociología Económica</div>
+    <div class="footer-info">Carrera de Sociología · FSOC · UBA</div>
+  </footer>
+</div>
+
+<!-- ═══════════ DOCENTES ═══════════ -->
+<div class="page" id="page-docentes">
+  <div class="page-header">
+    <div class="eyebrow">Equipo docente</div>
+    <h1>Docentes</h1>
+  </div>
+
+  <div class="section">
+
+    <div class="docente-card">
+      <div class="docente-avatar">VP</div>
+      <div>
+        <div class="docente-role">Profesora Adjunta</div>
+        <div class="docente-name">Verónica Pérez</div>
+        <p>Doctora en Ciencias Sociales y Socióloga (UBA). Investigadora del CONICET con sede en el Instituto de Altos Estudios Sociales de la Universidad Nacional de San Martín. Integrante del IIGG-UBA y del Programa Interdisciplinario de Transporte de la UBA (PIUBAT).</p>
+        <p>Es autora y coordinadora junto a Julián Rebón de <em>La Perturbación como motor de la historia. Los ferrocarriles metropolitanos durante el kirchnerismo</em> (2017) y <em>Las vías de la acción directa</em> (2012). Ha escrito numerosos artículos en revistas especializadas.</p>
+        <span class="tag">CONICET</span><span class="tag">IDAES-UNSAM</span><span class="tag">IIGG-UBA</span>
+      </div>
+    </div>
+
+    <div class="docente-card">
+      <div class="docente-avatar">DA</div>
+      <div>
+        <div class="docente-role">Jefa de Trabajos Prácticos</div>
+        <div class="docente-name">Débora Ascencio</div>
+        <p>Doctora en Ciencias Sociales (UBA), Magister en Sociología Económica (UNSAM) y Licenciada en Sociología (UBA). Becaria posdoctoral del CONICET, con sede en el Centro de Innovación de los Trabajadores (CITRA).</p>
+        <p>Directora del Proyecto de Reconocimiento Institucional "Capacidades y recursos de poder en la prestación de los servicios públicos. El caso del transporte y la energía en la RMBA (2002-2019)" — FSOC-UBA, 2022-2024.</p>
+        <span class="tag">CONICET</span><span class="tag">CITRA</span>
+      </div>
+    </div>
+
+    <div class="docente-card">
+      <div class="docente-avatar">CZ</div>
+      <div>
+        <div class="docente-role">Ayudante de Primera</div>
+        <div class="docente-name">Clara Zuñiga</div>
+        <p>Maestranda y especialista en Planificación Urbana y Regional (UBA-FADU). Arquitecta (FAU-UNLP). Becaria doctoral del CONICET, con sede en la Escuela Interdisciplinaria de Altos Estudios Sociales, Universidad Nacional de San Martín.</p>
+        <p>Investiga la infraestructura de servicios de agua y saneamiento en municipios periurbanos con déficits crónicos de cobertura y calidad en la RMBA.</p>
+        <span class="tag">CONICET</span><span class="tag">IDAES-UNSAM</span>
+      </div>
+    </div>
+
+    <div class="docente-card">
+      <div class="docente-avatar">CH</div>
+      <div>
+        <div class="docente-role">Colaboradora Docente</div>
+        <div class="docente-name">Candela Hernández</div>
+        <p>Doctora en Ciencias Sociales (FSOC-UBA). Magister en Investigación en Ciencias Sociales y Socióloga (FSOC-UBA). Becaria posdoctoral del CONICET con sede en el Instituto de Investigaciones Gino Germani.</p>
+        <p>Investiga los límites y potencialidades de la construcción del poder social de los usuarios/pasajeros del sistema metropolitano de transporte. Docente en el Taller de Investigaciones sobre Cambio Social (FSOC-UBA) y en Sociología (FADU-UBA).</p>
+        <span class="tag">CONICET</span><span class="tag">IIGG-UBA</span><span class="tag">PIUBAT</span>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-brand">Cátedra Pérez — Sociología Económica</div>
+    <div class="footer-info">Carrera de Sociología · FSOC · UBA</div>
+  </footer>
+</div>
+
+<!-- ═══════════ INVESTIGACIÓN ═══════════ -->
+<div class="page" id="page-investigacion">
+  <div class="page-header">
+    <div class="eyebrow">Equipo docente</div>
+    <h1>Investigación</h1>
+  </div>
+
+  <div class="section">
+    <h2>Subsidios de investigación vigentes</h2>
+
+    <div class="inv-item"><p>Capacidades y recursos de poder en la prestación de los servicios públicos. El caso del transporte y la energía en la Región Metropolitana de Buenos Aires (2002-2019) — <strong>PRI 2022 R22-03</strong></p></div>
+    <div class="inv-item"><p>Estado y empresas en la Argentina de la posconvertibilidad. El caso del transporte colectivo de pasajeros del Área Metropolitana de Buenos Aires — <strong>PICT 2016 4803</strong></p></div>
+    <div class="inv-item"><p>Cuidado y valorización de lo público en el sistema metropolitano de transporte ferroviario. Percepciones y prácticas de los usuarios — <strong>PDTS 147</strong></p></div>
+    <div class="inv-item"><p>Programa Interdisciplinario de Estudios del Transporte y la Movilidad — <strong>UNSAM</strong></p></div>
+    <div class="inv-item"><p>Programa Interdisciplinario de la UBA sobre estudios del Transporte — <strong>PIUBAT</strong></p></div>
+    <div class="inv-item"><p>El cambio social en la producción. Los casos de las cooperativas de trabajo y las empresas reestatizadas — <strong>UBACyT 20020160100020</strong> · Instituto de Investigaciones Gino Germani · FSOC-UBA</p></div>
+    <div class="inv-item"><p>Programa de estudios sobre las élites argentinas — <strong>CESE – IDAES – UNSAM</strong></p></div>
+
+    <h2>Producción del equipo</h2>
+
+    <div class="inv-item"><p>Pérez, V. y Rebón, J. (coords.) (2017). <em>La perturbación como motor de la historia. Los ferrocarriles metropolitanos durante el kirchnerismo.</em> Buenos Aires: Biblos-CLACSO.</p></div>
+    <div class="inv-item"><p>Ascencio, D. (2021). El deterioro de las capacidades técnico-operativas de las empresas públicas argentinas durante la dictadura cívico-militar (1976-1983). <em>História Econômica & História de Empresas,</em> 24, n°3, 851-882.</p></div>
+    <div class="inv-item"><p>Ascencio, D. e Iramain, L. (2021). El desempeño económico financiero de las firmas de la SIGEP durante la última dictadura cívico-militar (1976-1983). <em>H-Industria,</em> 15, N°29, pp. 23-47.</p></div>
+    <div class="inv-item"><p>Hernández, C. (2017). «La corrupción mata». Los Familiares de Víctimas de la Tragedia de Once y sus acciones colectivas en la construcción del problema ferroviario. <em>Argumentos. Revista de crítica social.</em> IIGG-FSOC-UBA.</p></div>
+
+    <h2>Planes de trabajo disponibles</h2>
+    <div class="inv-item"><p><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/04/plan-post-doc-perez-v.pdf" target="_blank">Plan de trabajo posdoctoral CONICET — Pérez, Verónica</a></p></div>
+    <div class="inv-item"><p><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/04/plan-de-trabajo-conicet-ascencio.pdf" target="_blank">Plan de trabajo doctoral CONICET — Ascencio, Débora</a></p></div>
+    <div class="inv-item"><p><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/04/plan_de_trabajo_final_hernandez.pdf" target="_blank">Plan de trabajo posdoctoral CONICET — Hernández, Candela</a></p></div>
+  </div>
+
+  <footer>
+    <div class="footer-brand">Cátedra Pérez — Sociología Económica</div>
+    <div class="footer-info">Carrera de Sociología · FSOC · UBA</div>
+  </footer>
+</div>
+
+<!-- ═══════════ BIBLIOTECA ═══════════ -->
+<div class="page" id="page-biblioteca">
+  <div class="page-header">
+    <div class="eyebrow">Bibliografía del seminario</div>
+    <h1>Biblioteca</h1>
+  </div>
+
+  <div class="section">
+    <p>La bibliografía completa del seminario, organizada por unidad. Hacé clic en cada unidad para ver los textos disponibles para descarga.</p>
+
+    <div class="bib-unidad" id="u1">
+      <div class="bib-unidad-header" onclick="toggleBib('u1')">
+        <h3>Unidad 1 · Delimitando los servicios públicos</h3>
+        <span class="bib-chevron">▾</span>
+      </div>
+      <div class="bib-body">
+        <div class="bib-section-label">Bibliografía obligatoria</div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2020/03/solanes-1999.pdf" target="_blank">Solanes, M. (1999). Servicios públicos y regulación. Consecuencias legales de las fallas de mercado. CEPAL.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2020/03/el-concepto-de-servicio-pc3bablico-juan-m.-gonzc3a1lez-moras-2004.pdf" target="_blank">González Moras, J.M. (2004). El concepto de servicio público. RAP.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/03/gonzalez-moras-el-servicio-pubico-como-derecho-social.pdf" target="_blank">González Moras, J.M. (2017). El servicio público como derecho social. EDULP.</a></div>
+        <div class="bib-section-label">Bibliografía complementaria</div>
+        <div class="bib-item"><a href="https://acrobat.adobe.com/link/review?uri=urn:aaid:scds:US:7fe8928c-8429-3c8e-b3ef-a9c86058dc1f" target="_blank">Di Lorenzo, T. (1996). El Mito del Monopolio Natural. The review of Austrian Economics.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/03/oslak-o.-la-capilaridad-del-rol-del-estado.pdf" target="_blank">Oszlak, O. (2012). La capilaridad social del rol del Estado. Voces del Fénix N°17.</a></div>
+      </div>
+    </div>
+
+    <div class="bib-unidad" id="u2">
+      <div class="bib-unidad-header" onclick="toggleBib('u2')">
+        <h3>Unidad 2 · Regulación, subsidios y tarifas</h3>
+        <span class="bib-chevron">▾</span>
+      </div>
+      <div class="bib-body">
+        <div class="bib-section-label">Bibliografía obligatoria</div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/03/oszlak-privatizacion-y-capacidad-de-regulacion-estatal.pdf" target="_blank">Oszlak, O. (2004). Privatización y capacidad de regulación estatal. FCE y CLAD.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2018/12/Ferro-Lentini-Politicas-tarifarias.pdf" target="_blank">Ferro, G. y Lentini, E. (2013). Políticas tarifarias para el logro de los ODM. CEPAL.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2020/03/ferro-y-lentini-experiencias-en-agua-y-saneamiento-y-transporte-urbano-2012.pdf" target="_blank">Ferro, G. y Lentini, E. (2012). Infraestructuras y equidad social. CEPAL.</a></div>
+        <div class="bib-section-label">Bibliografía complementaria</div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2018/12/Nahón-y-Bonofiglio-2007.pdf" target="_blank">Nahón, C. y Bonofiglio, N. (2007). ¿Entes de regulación o control? RAP.</a></div>
+      </div>
+    </div>
+
+    <div class="bib-unidad" id="u3">
+      <div class="bib-unidad-header" onclick="toggleBib('u3')">
+        <h3>Unidad 3 · Mercados, empresas y empresarios</h3>
+        <span class="bib-chevron">▾</span>
+      </div>
+      <div class="bib-body">
+        <div class="bib-section-label">Bibliografía obligatoria</div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/03/swedberg-2001-hacia-una-nueva-sociologia-economica.pdf" target="_blank">Swedberg, R. (2001). Hacia una nueva sociología económica. Trabajo, Año 2, N°4.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2019/01/bourdieu-las-estructuras-sociales-de-la-economía-2012-1-split-merge.pdf" target="_blank">Bourdieu, P. (2002). Las estructuras sociales de la economía. Buenos Aires: Manantial.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2018/12/04.-Granovetter-Acción-económica-y-estructura-social.pdf" target="_blank">Granovetter, M. (1985). Acción económica y estructura social: el problema de la incrustación.</a></div>
+        <div class="bib-section-label">Bibliografía complementaria</div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2018/12/Papeles_09_03_Gaggero.pdf" target="_blank">Gaggero, A. (2012). Estado, mercado y dinámicas organizacionales. Papeles de Trabajo N°9.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2020/03/granovetter-y-mcguire-1998.pdf" target="_blank">Granovetter, M. y Mc Guire, P. (1998). The making of an industry: electricity in the United States.</a></div>
+      </div>
+    </div>
+
+    <div class="bib-unidad" id="u4">
+      <div class="bib-unidad-header" onclick="toggleBib('u4')">
+        <h3>Unidad 4 · La relación Estado-empresarios</h3>
+        <span class="bib-chevron">▾</span>
+      </div>
+      <div class="bib-body">
+        <div class="bib-section-label">Bibliografía obligatoria</div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2018/12/Schneider-1999-Las-relaciones-entre-el-estado-y-las-empresas-y-sus-conse.pdf" target="_blank">Schneider, B. R. (1999). Las relaciones entre el Estado y las empresas y sus consecuencias para el desarrollo. Desarrollo Económico 153.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2018/12/Skocpol-2011.pdf" target="_blank">Skocpol, T. (2011). El Estado regresa al primer plano. Zona Abierta N° 57/58.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2018/12/Block-y-Evans-2007-resaltado.pdf" target="_blank">Block, F. y Evans, P. (2007). El Estado y la economía. En Evans, P. Instituciones y desarrollo. ILSA.</a></div>
+        <div class="bib-section-label">Bibliografía complementaria</div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2020/03/block-f.-20061944.-introduccic3b3n-en-polanyi-la-gran-transformacic3b3n..pdf" target="_blank">Block, F. (2006). Introducción, en Polanyi K, La Gran Transformación. FCE.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2020/03/castellani-llanpart-2012-debates-en-torno-a-la-calidad-de-la-intervencic3b3n-estatal.pdf" target="_blank">Castellani, A. y Llanpart, F. (2012). Debates en torno a la calidad de la intervención estatal. Papeles de Trabajo N°9.</a></div>
+      </div>
+    </div>
+
+    <div class="bib-unidad" id="u5">
+      <div class="bib-unidad-header" onclick="toggleBib('u5')">
+        <h3>Unidad 5 · La relación Estado-usuarios y empresas</h3>
+        <span class="bib-chevron">▾</span>
+      </div>
+      <div class="bib-body">
+        <div class="bib-section-label">Bibliografía obligatoria</div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2022/03/erik-olin-wright-preguntas-a-la-desigualdad-capitulo-6-los-futuros-del-capitalismo-1-2.pdf" target="_blank">Wright, E. O. (2010). Preguntas a la desigualdad. Universidad del Rosario (Cap. 6).</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2022/03/erikwright-puntosbrujula-nlr41-1.pdf" target="_blank">Wright, E.O. (2015). La brújula socialista. En Construyendo utopías reales. Akal.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2018/12/Lopez-y-Felder-1997-Estado-y-usuarios.pdf" target="_blank">López, A. y Felder, R. (1997). Nuevas relaciones entre el Estado y los usuarios de servicios públicos en la post privatización. INAP.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/03/clifton-etal-2011-los-ciudadanos-ante-la-regulacion-ue.pdf" target="_blank">Clifton et al. (2011). Los ciudadanos ante la regulación europea de servicios públicos. Revista de Economía Pública.</a></div>
+        <div class="bib-section-label">Bibliografía complementaria</div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2022/03/clifton2011.pdf" target="_blank">Clifton et al. (2011). Is market-oriented reform producing a 'two-track' europe? Annals of Public and Cooperative Economics.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/06/postdata-26-1-hernandez-perez.pdf" target="_blank">Hernández, C. y Pérez, V. (2020). El porvenir de la movilidad como derecho social. Postdata 2021, N°26.</a></div>
+      </div>
+    </div>
+
+    <div class="bib-unidad" id="u6">
+      <div class="bib-unidad-header" onclick="toggleBib('u6')">
+        <h3>Unidad 6 · Los servicios públicos desde una perspectiva histórica</h3>
+        <span class="bib-chevron">▾</span>
+      </div>
+      <div class="bib-body">
+        <div class="bib-section-label">Bibliografía obligatoria</div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/03/guajardo-soto-2015.-la-empresa-publica-y-sus-definiciones-de-largo-plazo.pdf" target="_blank">Guajardo Soto, G. (2015). La empresa pública y sus definiciones de largo plazo. UNAM.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/03/regalsky-y-rougier-2015.-los-derroteros-del-estado-empresario-en-la-argentina-del-siglo-xx.pdf" target="_blank">Regalsky, A. y Rougier, M. (2015). Los derroteros del Estado empresario en la Argentina del siglo XX. EDUNTREF.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2022/03/2215-texto-del-articulo-7732-1-10-20211228-2-1.pdf" target="_blank">Ascencio, D. (2021). Desde los orígenes hacia el auge. Reconstrucción histórica de las empresas públicas argentinas (1800-1975). Ciclos, Vol. 28, N°57.</a></div>
+        <div class="bib-section-label">Bibliografía complementaria</div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/03/comin-y-diaz-fuentes-2004.-la-empresa-publica-en-europa-una-perspectiva-historica.pdf" target="_blank">Comín y Díaz Fuentes (2004). La empresa pública en Europa: una perspectiva histórica. Síntesis.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2023/04/3582-texto-del-articulo-14189-1-10-20230113.pdf" target="_blank">Ascencio y Navarro Rocha (2022). Auge y declive de las empresas públicas en el sector eléctrico. Revista de Gestión Pública.</a></div>
+      </div>
+    </div>
+
+    <div class="bib-unidad" id="u7">
+      <div class="bib-unidad-header" onclick="toggleBib('u7')">
+        <h3>Unidad 7 · Cambios y continuidades (1990–2020)</h3>
+        <span class="bib-chevron">▾</span>
+      </div>
+      <div class="bib-body">
+        <div class="bib-section-label">Bibliografía obligatoria</div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2018/12/Azpiazu-y-Basualdo-2004.pdf" target="_blank">Azpiazu, D. y Basualdo, E. (2004). Las privatizaciones en la Argentina. FLACSO.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/03/nahon-2006.-el-estado-del-estado.-el-desafio-de-los-servicios-publicos.pdf" target="_blank">Nahón, C. (2006). El estado del Estado. El desafío de los servicios públicos. Realidad Económica, 219.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2018/12/Azpiazu-y-Schorr.pdf" target="_blank">Azpiazu, D. y Schorr, M. (2003). Crónica de una sumisión anunciada. Buenos Aires: Siglo XXI.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2022/03/conicet_digital_nro.7219fcd7-9e5c-4200-a9f3-4bf5a4a2f62e_a-1.pdf" target="_blank">Pérez, V. y Rocca, M. (2017). Estado y servicios públicos en la posconvertibilidad (2003-2015). Temas y debates, 33.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/03/thwaites-rey-mabel-2016.-estado-y-empresas-publicas-en-america-latina.-historia-y-desafios-actuales.pdf" target="_blank">Thwaites Rey, M. (2016). Estado y empresas públicas en América Latina. Transnational Institute.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2022/03/2198-texto-del-articulo-7777-3-10-20211229.pdf" target="_blank">Navarro, L. (2021). Grandes empresas en la Argentina de la posconvertibilidad. H-Industria, 29.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/06/navarro-2020-electricas-posconvertibilidad.pdf" target="_blank">Navarro, L. (2020). Las empresas de energía eléctrica entre las reformas de mercado y la posconvertibilidad. Realidad Económica.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2020/03/serrani-2020.-alhe.-regulacion-de-servicio-publico-de-gas-natural.pdf" target="_blank">Serrani, E. (2020). Modelos de regulación de servicios públicos de gas natural en Argentina, 1967-2017. América Latina en la Historia Económica.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/03/brill-y-post-2014.-policy-traps-y-subsidios-al-consumo-la-politica-de-tarifas-de-servicios-publicos-en-argentina-2002-2014..pdf" target="_blank">Brill y Post (2014). Policy traps y subsidios al consumo. La política de tarifas en Argentina, 2002-2014.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/06/perez-serrani-2021-cuadernos-del-cendes-en-prensa.pdf" target="_blank">Pérez, V. y Serrani, E. (2021). ¿Atrapados sin querer salir? Los subsidios económicos a los servicios públicos en Argentina 2002-2019. Cuadernos del Cendes, 105.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2022/03/2937-texto-del-arti_culo-9924-1-10-20200627.pdf" target="_blank">Pérez, V. y Sánchez, J. (2020). La relación Estado-mercado en el autotransporte público en la RMBA (1928-2018). Perspectivas de Políticas Públicas, 18.</a></div>
+      </div>
+    </div>
+
+    <div class="bib-unidad" id="u8">
+      <div class="bib-unidad-header" onclick="toggleBib('u8')">
+        <h3>Unidad 8 · La pregunta de investigación</h3>
+        <span class="bib-chevron">▾</span>
+      </div>
+      <div class="bib-body">
+        <div class="bib-section-label">Bibliografía obligatoria</div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2020/03/sautu2.pdf" target="_blank">Sautu, R. et al. (2005). Recomendaciones para la redacción del marco teórico. Buenos Aires: CLACSO.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2020/03/la_pregunta_inicial.pdf" target="_blank">Quivy, R., Campenhoudt, L.V. (1999). La pregunta inicial. Manual de Investigación en Ciencias Sociales.</a></div>
+        <div class="bib-item"><a href="https://sociologiasesp.wordpress.com/wp-content/uploads/2021/03/beckert-h.-2018.-datos-pruebas-e-ideas.-por-que-los-cientificos-sociales-deberian-tomarselos-mas-en-serio-y-aprender-de-sus-errores..pdf" target="_blank">Becker, H. (2018). Datos, pruebas e ideas. Por qué los científicos sociales deberían tomárselos más en serio.</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-brand">Cátedra Pérez — Sociología Económica</div>
+    <div class="footer-info">Carrera de Sociología · FSOC · UBA</div>
+  </footer>
+</div>
+
+<!-- ═══════════ CONTACTO ═══════════ -->
+<div class="page" id="page-contacto">
+  <div class="page-header">
+    <div class="eyebrow">Ponerse en contacto</div>
+    <h1>Contacto</h1>
+  </div>
+
+  <div class="section">
+    <div class="contacto-grid">
+      <div class="contacto-info">
+        <p>Para consultas sobre el seminario, inscripciones o actividades académicas, podés escribirnos a través de este formulario o acercarte directamente a la facultad.</p>
+        <div class="label">Institución</div>
+        <div class="value">Facultad de Ciencias Sociales<br>Universidad de Buenos Aires (UBA)</div>
+        <div class="label">Carrera</div>
+        <div class="value">Licenciatura en Sociología</div>
+        <div class="label">Sede</div>
+        <div class="value">Santiago del Estero 1029<br>Ciudad Autónoma de Buenos Aires</div>
+        <div class="label">Redes del equipo</div>
+        <div class="value">ResearchGate · CONICET Digital<br>IIGG – UBA</div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" placeholder="tu@mail.com">
+        </div>
+        <div class="form-group">
+          <label>Asunto</label>
+          <input type="text" placeholder="Consulta sobre el seminario">
+        </div>
+        <div class="form-group">
+          <label>Mensaje</label>
+          <textarea placeholder="Escribí tu consulta acá..."></textarea>
+        </div>
+        <button class="btn-submit">Enviar mensaje →</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-brand">Cátedra Pérez — Sociología Económica</div>
+    <div class="footer-info">Carrera de Sociología · FSOC · UBA</div>
+  </footer>
+</div>
+
+<script>
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    const link = document.querySelector(`.nav-links a[data-page="${name}"]`);
+    if (link) link.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function toggleBib(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+</script>
+</body>
+</html>
